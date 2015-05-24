@@ -21,24 +21,24 @@ int main()
 
     // Initialize state to outside a word
     state = OUT;
+    length = 0;
 
     while ((c = getchar()) != EOF)
     {
-        // If current char is whitespace, record word length and reset state
-        if ((state == IN) && is_whitespace(c))
+        if (is_whitespace(c))
         {
-            ++word_frequency[length];
+            if (state == IN)
+            {
+                ++word_frequency[length];
+                length = 0;
+            }
             state = OUT;
         }
-        // If current char is not whitespace, set state to IN and reset length
-        else if ((state == OUT) && !is_whitespace(c))
+        else
         {
             state = IN;
-            length = 0;
-        }
-        // Increment length
-        if (state == IN)
             ++length;
+        }
     }
 
     for (int i = 0; i < 10; ++i)
