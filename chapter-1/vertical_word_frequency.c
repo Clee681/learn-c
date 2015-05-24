@@ -1,14 +1,12 @@
 /**
  * Program to print a histogram of the lengths of words in its input
- * Horizontal version
+ * Vertical version
  */
 
 #include <stdio.h>
 
 #define IN 1 // inside a word
 #define OUT 0 // outside a word
-
-int is_whitespace(char c);
 
 int main()
 {
@@ -25,13 +23,13 @@ int main()
     while ((c = getchar()) != EOF)
     {
         // If current char is whitespace, record word length and reset state
-        if ((state == IN) && is_whitespace(c))
+        if (c == ' ' || c == '\n' || c == '\t')
         {
             ++word_frequency[length];
             state = OUT;
         }
         // If current char is not whitespace, set state to IN and reset length
-        else if ((state == OUT) && !is_whitespace(c))
+        else if (state == OUT)
         {
             state = IN;
             length = 0;
@@ -50,9 +48,4 @@ int main()
 
         printf("\n");
     }
-}
-
-int is_whitespace(char c)
-{
-    return c == ' ' || c == '\n' || c == '\t';
 }
