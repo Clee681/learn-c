@@ -29,15 +29,27 @@ int main()
         {
             if (state == IN)
             {
+                // record word frequency and reset length and state
                 ++word_frequency[length];
                 length = 0;
+                state = OUT;
             }
-            state = OUT;
+            else
+            {
+                // do nothing
+            }
         }
         else
         {
-            state = IN;
-            ++length;
+            if (state == IN)
+            {
+                ++length;
+            }
+            else
+            {
+                ++length;
+                state = IN;
+            }
         }
     }
 
